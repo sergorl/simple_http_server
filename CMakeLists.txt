@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project(http_server)
 
 set (CMAKE_CXX_STANDARD 11)
+add_compile_options(-std=c++11) 
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -26,3 +27,8 @@ set(SRC
 add_executable(final ${SRC})
 
 target_link_libraries(final Qt5::Core Qt5::Network)
+
+
+add_custom_command(TARGET final 
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:final> .)
