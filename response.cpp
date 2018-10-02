@@ -10,7 +10,12 @@ QString Response::OK::info(
                  );
 
 QString Response::NOT_FOUND::info(
-                    "HTTP/1.0 404 Not Found"
+                    "HTTP/1.0 404 Not Found\r\n"
+                    "Content-length: %1\r\n"
+                    "Connection: close\r\n"
+                    "Content-Type: text/html\r\n"
+                    "\r\n"
+                    "%2"
                  );
 
 Response::OK::OK(QString* content_, int content_len_) :
@@ -29,5 +34,8 @@ QString* Response::OK::toString()
 
 QString* Response::NOT_FOUND::toString()
 {
-    return new QString(info);
+    QString* ans = new QString(info);
+    QString content = "<html><h2><center>404 Not Found</center></h2></html>\r\n\n";
+    QString* resp = new QString(std::move(ans->arg(QString::number(content.length()), content)));
+    return resp;
 }
