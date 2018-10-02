@@ -11,13 +11,8 @@ QString* Handler::responce()
 {
     QString* data = readAll();
 
-    if (data != nullptr) {
-
-//        qDebug() << "OK FIND" << Response::NOT_FOUND().toString();
+    if (data != nullptr)
         return Response::OK(data, data->length()).toString();
-    }
-
-//    qDebug() << "NOT FOUND" << Response::NOT_FOUND().toString();
 
     return Response::NOT_FOUND().toString();
 }
@@ -27,7 +22,10 @@ QString Handler::handle()
     QStringList items = resp->split(" ");
     QString path = items[1];
 
-    QString file = path.section("/", -1, QString::SectionSkipEmpty);
+    QString str = path.section("/", -1, QString::SectionSkipEmpty);
+    QStringList parts = str.split("\?");
+
+    QString file = parts.at(0);
 
     return file;
 }
@@ -61,7 +59,6 @@ QFile* Handler::find(const QString &need_file)
 
         if (file_info.canonicalFilePath().contains(need_file)) {
             file = new QFile(file_info.filePath());
-            qDebug() << "File is found: " << file->fileName();
             break;
         }
     }

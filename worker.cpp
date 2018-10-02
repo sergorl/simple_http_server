@@ -31,8 +31,6 @@ void Worker::readData()
     QString resp = os.readAll();
 
     QString id =  QString::number((long long) QThread::currentThreadId(), 16) ;
-//    QString received = QString("Received from thread #%1: %2").arg(id, resp);
-//    qDebug() << received;
 
     handle(resp);
 }
@@ -41,7 +39,6 @@ void Worker::handle(QString& resp)
 {
     Handler h(dir, resp);
     QByteArray responce = h.responce()->toLocal8Bit();
-    qDebug() << "Response: " << responce;
     socket->write(responce);
 }
 
