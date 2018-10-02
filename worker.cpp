@@ -40,6 +40,8 @@ void Worker::handle(QString& resp)
     Handler h(dir, resp);
     QByteArray responce = h.responce()->toLocal8Bit();
     socket->write(responce);
+
+    socket->close();
 }
 
 void Worker::onDisconnected()

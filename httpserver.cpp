@@ -3,7 +3,7 @@
 HttpServer::HttpServer(Args& arg, QObject *parent) : QTcpServer(parent)
 {
     pool = new QThreadPool(this);   
-    pool->setMaxThreadCount(512);
+    pool->setMaxThreadCount(128);
 
     ip = arg.ip;
     port = arg.port;
@@ -20,15 +20,14 @@ void HttpServer::start()
 
 void HttpServer::incomingConnection(qintptr socketDescriptor)
 {
-    qDebug() << "New connection";
     Worker* w = new Worker(socketDescriptor);
     w->setDir(dir);
+
     pool->start(w);
 }
 
 Args::Args(QString ip_, QString port_, QString dir_) : ip(ip_), port(port_), dir(dir_)
-{
-}
+{}
 
 Args::Args()
 {
