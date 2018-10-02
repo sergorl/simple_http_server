@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 
 project(http_server)
 
+execute_process(COMMAND sudo apt install qtbase5-dev)
+
 set (CMAKE_CXX_STANDARD 11)
 add_compile_options(-std=c++11) 
 
