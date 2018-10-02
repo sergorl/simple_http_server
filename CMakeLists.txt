@@ -23,6 +23,6 @@ set(SRC
     response.cpp
     main.cpp
 )
-add_executable(server ${SRC})
+add_executable(final ${SRC})
 
-target_link_libraries(server Qt5::Core Qt5::Network)
+target_link_libraries(final Qt5::Core Qt5::Network)

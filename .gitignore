@@ -4,5 +4,6 @@ CMakeFiles
 CMakeCache.txt
 Makefile
 server
+final
 *.pro.user
 *.pro.user.*
