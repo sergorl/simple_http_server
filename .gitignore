@@ -1,0 +1,7 @@
+*.cmake
+server_autogen/
+CMakeFiles
+CMakeCache.txt
+MakeFile
+*.pro.user
+*.pro.user.*
