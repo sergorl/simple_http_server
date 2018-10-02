@@ -3,6 +3,7 @@
 HttpServer::HttpServer(Args& arg, QObject *parent) : QTcpServer(parent)
 {
     pool = new QThreadPool(this);   
+    pool->setMaxThreadCount(512);
 
     ip = arg.ip;
     port = arg.port;
