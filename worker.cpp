@@ -41,7 +41,7 @@ void Worker::handle(QString& resp)
     QByteArray responce = h.responce()->toLocal8Bit();
     socket->write(responce);
 
-    socket->close();
+    socket->disconnectFromHost();
 }
 
 void Worker::onDisconnected()
