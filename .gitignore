@@ -2,6 +2,7 @@
 server_autogen/
 CMakeFiles
 CMakeCache.txt
-MakeFile
+Makefile
+server
 *.pro.user
 *.pro.user.*
