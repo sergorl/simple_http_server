@@ -38,7 +38,7 @@ QString* Handler::readAll()
     if (need_file != "" && (file = find(need_file)) != nullptr) {
 
         if (!file->open(QIODevice::ReadOnly)) {
-            qDebug() << "File can't open!";
+            //qDebug() << "File can't open!";
             return data;
         }
 
