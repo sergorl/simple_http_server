@@ -23,20 +23,12 @@ void HttpServer2::start()
 
 void HttpServer2::incomingConnection(qintptr socketDescriptor)
 {
-    loop = new QEventLoop;
-
     socket = new QTcpSocket;
     socket->setSocketDescriptor(socketDescriptor);
 
     connect(socket, SIGNAL(readyRead()),
             this,   SLOT(readData()),
             Qt::DirectConnection);
-
-//    connect(socket, SIGNAL(disconnected()),
-//            this, SLOT(onDisconnected()),
-//            Qt::DirectConnection );
-
-    loop->exec();
 }
 
 void HttpServer2::readData()
@@ -56,6 +48,6 @@ void HttpServer2::readData()
 void HttpServer2::sendData(QByteArray to)
 {
     socket->write(to);
-    socket->disconnectFromHost();
     socket->close();
+    socket->disconnectFromHost();
 }
