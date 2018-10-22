@@ -1,8 +1,8 @@
 #include <QCoreApplication>
 #include <QDebug>
-#include <iostream>
 
 #include "httpserver.h"
+#include "httpserver2.h"
 #include "response.h"
 #include "handler.h"
 
@@ -19,7 +19,7 @@ static void skeleton_daemon();
 
 int main(int argc, char *argv[])
 {
-    skeleton_daemon();
+//    skeleton_daemon();
 
     QCoreApplication a(argc, argv);
 

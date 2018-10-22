@@ -9,19 +9,8 @@
 #include <QThreadPool>
 
 #include "worker.h"
+#include "util.h"
 
-struct Args {
-
-    Args(QString ip_, QString port_, QString dir_);
-
-    Args();
-
-    QString ip;
-    QString port;
-    QString dir;
-
-    QString toString();
-};
 
 class HttpServer : public QTcpServer
 {

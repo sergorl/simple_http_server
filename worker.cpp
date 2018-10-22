@@ -2,6 +2,8 @@
 
 Worker::Worker(qintptr socketDescriptor_) : socketDescriptor(socketDescriptor_) {}
 
+Worker::Worker(QString from_) : from(from_) {}
+
 Worker::~Worker() {
     if (socket != nullptr) socket->close();
     socket = nullptr;
@@ -14,6 +16,12 @@ void Worker::setDir(QString dir)
 
 void Worker::run() {
 
+    work1();
+//    work2();
+}
+
+void Worker::work1()
+{
     loop = new QEventLoop;
 
     socket = new QTcpSocket;
@@ -25,12 +33,21 @@ void Worker::run() {
     loop->exec();
 }
 
+void Worker::work2()
+{
+    loop = new QEventLoop;
+
+    handle2(from);
+
+    loop->exec();
+}
+
 void Worker::readData()
 {
     QTextStream os(socket);
     QString resp = os.readAll();
 
-    QString id =  QString::number((long long) QThread::currentThreadId(), 16) ;
+//    qDebug() << "From: " << resp;
 
     handle(resp);
 }
@@ -39,9 +56,24 @@ void Worker::handle(QString& resp)
 {
     Handler h(dir, resp);
     QByteArray responce = h.responce()->toLocal8Bit();
-    socket->write(responce);
+//    socket->write(responce);
 
-    socket->disconnectFromHost();
+    QByteArray arrBlock;
+    QDataStream out(&arrBlock, QIODevice::WriteOnly);
+//    out << quint16(0) << responce;
+    out << responce;
+//    out.device()->seek(0);
+//    out << quint16(arrBlock->size() - sizeof(quint16));
+    socket->write(arrBlock);
+    socket->close();
+}
+
+void Worker::handle2(QString &resp)
+{
+    Handler h(dir, resp);
+    QByteArray responce = h.responce()->toLocal8Bit();
+
+    emit workDone(responce);
 }
 
 void Worker::onDisconnected()

@@ -23,10 +23,14 @@ SOURCES += \
         worker.cpp \
         httpserver.cpp \
         response.cpp \
-        handler.cpp
+        handler.cpp \
+        httpserver2.cpp \
+        util.cpp
 
 HEADERS += \
         worker.h \
         httpserver.h \
         response.h \
-        handler.h
+        handler.h \
+        httpserver2.h \
+        util.h
