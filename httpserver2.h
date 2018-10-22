@@ -30,6 +30,7 @@ private slots:
 private:
     QThreadPool* pool;
     QTcpSocket *socket;
+    QEventLoop* loop;
 
     QString ip;
     QString port;
