@@ -17,6 +17,7 @@ find_package(Qt5Network CONFIG REQUIRED)
 
 set(SRC    
     httpserver.cpp
+    httpserver2.cpp
     worker.cpp
     handler.cpp
     response.cpp
