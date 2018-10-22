@@ -43,7 +43,7 @@ void HttpServer2::readData()
 {
     QString from = socket->readAll();
 
-    qDebug() << "From 2:" << from;
+//    qDebug() << "From 2:" << from;
 
     Worker* w = new Worker(from);
     w->setDir(dir);
