@@ -46,10 +46,41 @@ void Worker::readData()
 {
     QTextStream os(socket);
     QString resp = os.readAll();
-
-//    qDebug() << "From: " << resp;
-
     handle(resp);
+
+//    int m_nNextBlockSize = 0;
+
+//    QDataStream in(socket);
+
+//    QString req = "";
+
+//    qDebug() << "Start to read";
+
+//    for (;;) {
+//        if (!m_nNextBlockSize) {
+//            if (socket->bytesAvailable() < sizeof(quint16)) {
+//                break;
+//            }
+//            in >> m_nNextBlockSize;
+//        }
+
+//        if (socket->bytesAvailable() < m_nNextBlockSize) {
+//            break;
+//        }
+
+//        QString data;
+//        in >> data;
+
+//        qDebug() << "Read:\n" << data;
+
+//        req += data;
+
+//        m_nNextBlockSize = 0;
+//    }
+
+//    qDebug() << "=========== all:\n" << req;
+
+//    handle(req);
 }
 
 void Worker::handle(QString& resp)

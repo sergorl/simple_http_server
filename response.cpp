@@ -36,6 +36,7 @@ QString* Response::NOT_FOUND::toString()
 {
     QString* ans = new QString(info);
     QString content = "<html><h2><center>404 Not Found</center></h2></html>\r\n\n";
-    QString* resp = new QString(std::move(ans->arg(QString::number(content.length()), content)));
+//    QString* resp = new QString(std::move(ans->arg(QString::number(content.length()), content)));
+    QString* resp = new QString(std::move(ans->arg(0, "")));
     return resp;
 }
