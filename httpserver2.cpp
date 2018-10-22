@@ -3,6 +3,7 @@
 HttpServer2::HttpServer2(Args& arg, QObject *parent) : QTcpServer(parent)
 {
     pool = new QThreadPool(this);
+    pool->setMaxThreadCount(64);
 
     ip = arg.ip;
     port = arg.port;
@@ -44,12 +45,12 @@ void HttpServer2::readData()
 
     qDebug() << "From 2:" << from;
 
-//    Worker* w = new Worker(from);
-//    w->setDir(dir);
+    Worker* w = new Worker(from);
+    w->setDir(dir);
 
-//    connect(w, &Worker::workDone, this, &HttpServer2::sendData, Qt::QueuedConnection);
+    connect(w, &Worker::workDone, this, &HttpServer2::sendData, Qt::QueuedConnection);
 
-//    pool->start(w);
+    pool->start(w);
 }
 
 void HttpServer2::sendData(QByteArray to)

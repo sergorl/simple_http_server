@@ -16,8 +16,8 @@ void Worker::setDir(QString dir)
 
 void Worker::run() {
 
-    work1();
-//    work2();
+//    work1();
+    work2();
 }
 
 void Worker::work1()
@@ -44,7 +44,6 @@ void Worker::work2()
 
 void Worker::readData()
 {
-    QTextStream os(socket);
     QString resp = socket->readAll();
     handle(resp);
 }
@@ -53,15 +52,16 @@ void Worker::handle(QString& resp)
 {
     Handler h(dir, resp);
     QByteArray responce = h.responce()->toLocal8Bit();
-//    socket->write(responce);
-
-    QByteArray arrBlock;
-    QDataStream out(&arrBlock, QIODevice::WriteOnly);
-    out << quint16(0) << *h.responce();
-    out.device()->seek(0);
-    out << quint16(arrBlock.size() - sizeof(quint16));
-    socket->write(arrBlock);
+    socket->write(responce);
     socket->close();
+
+//    QByteArray arrBlock;
+//    QDataStream out(&arrBlock, QIODevice::WriteOnly);
+//    out << quint16(0) << *h.responce();
+//    out.device()->seek(0);
+//    out << quint16(arrBlock.size() - sizeof(quint16));
+//    socket->write(arrBlock);
+//    socket->close();
 }
 
 void Worker::handle2(QString &resp)
