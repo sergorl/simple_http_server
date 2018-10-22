@@ -57,10 +57,9 @@ void Worker::handle(QString& resp)
 
     QByteArray arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
-    out << quint16(0) << responce;
-    out << responce;
+    out << quint16(0) << *h.responce();
     out.device()->seek(0);
-    out << quint16(arrBlock->size() - sizeof(quint16));
+    out << quint16(arrBlock.size() - sizeof(quint16));
     socket->write(arrBlock);
     socket->close();
 }
