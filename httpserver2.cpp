@@ -37,8 +37,6 @@ void HttpServer2::readData()
     pClientSocket = (QTcpSocket*)sender();
     QString from = pClientSocket->readAll();
 
-//    qDebug() << "From:" << from;
-
     Worker* w = new Worker(from);
     w->setDir(dir);
 

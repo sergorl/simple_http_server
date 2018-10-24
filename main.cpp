@@ -16,7 +16,6 @@
 
 static void skeleton_daemon();
 
-
 int main(int argc, char *argv[])
 {
     skeleton_daemon();

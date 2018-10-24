@@ -11,9 +11,9 @@ Handler::Handler(const QString &path, const QString& request)
 QString* Handler::responce()
 {
     if (data != nullptr)
-        return Response::OK(data, data->length()).toString();
+        return OK(data).toString();
 
-    return Response::NOT_FOUND().toString();
+    return NOT_FOUND().toString();
 }
 
 QString Handler::getFileName()

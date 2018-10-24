@@ -3,31 +3,29 @@
 
 #include <QString>
 
-class Response
-{
-public:
-
-    Response() = default;
-
-    class OK {
+class Response {
     public:
-        OK(QString* content_, int content_len_);
+
+        Response() = default;
+
+        static QString info;
+};
+
+class OK : Response {
+    public:
+        OK(QString* content_);
         QString* toString();
 
     private:
-        static QString info;
         QString* content;
-        int content_len;
-    };
+};
 
-    class NOT_FOUND {
+class NOT_FOUND : Response {
     public:
         NOT_FOUND() = default;
         QString* toString();
 
     private:
-        static QString info;
-    };
 };
 
 #endif // RESPONSE_H

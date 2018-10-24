@@ -4,11 +4,7 @@ HttpServer::HttpServer(Args& arg, QObject *parent) : QTcpServer(parent)
 {
     pool = new QThreadPool(this);   
     pool->setMaxThreadCount(8);
-    setMaxPendingConnections(128);
-
-//    qDebug() << "Max threads: " << pool->maxThreadCount();
-//    qDebug() << "Max connections: " << maxPendingConnections();
-//    setMaxPendingConnections(128);
+    setMaxPendingConnections(64);
 
     ip = arg.ip;
     port = arg.port;
