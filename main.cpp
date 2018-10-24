@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     Args arg;
-    HttpServer2 server(arg);
+    HttpServer server(arg);
     server.start();
 
     return a.exec();
