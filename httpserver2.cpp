@@ -23,7 +23,7 @@ void HttpServer2::start()
 
 void HttpServer2::incomingConnection(qintptr socketDescriptor)
 {
-    socket = new QTcpSocket;
+    QTcpSocket* socket = new QTcpSocket;
     socket->setSocketDescriptor(socketDescriptor);
 
     connect(socket, SIGNAL(readyRead()),
@@ -33,9 +33,10 @@ void HttpServer2::incomingConnection(qintptr socketDescriptor)
 
 void HttpServer2::readData()
 {
-    QString from = socket->readAll();
+    pClientSocket = (QTcpSocket*)sender();
+    QString from = pClientSocket->readAll();
 
-//    qDebug() << "From 2:" << from;
+//    qDebug() << "From:" << from;
 
     Worker* w = new Worker(from);
     w->setDir(dir);
@@ -47,7 +48,7 @@ void HttpServer2::readData()
 
 void HttpServer2::sendData(QByteArray to)
 {
-    socket->write(to);
-    socket->close();
-    socket->disconnectFromHost();
+    pClientSocket->write(to);
+    pClientSocket->close();
+    pClientSocket->disconnectFromHost();
 }

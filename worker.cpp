@@ -54,14 +54,6 @@ void Worker::handle(QString& resp)
     QByteArray responce = h.responce()->toLocal8Bit();
     socket->write(responce);
     socket->close();
-
-//    QByteArray arrBlock;
-//    QDataStream out(&arrBlock, QIODevice::WriteOnly);
-//    out << quint16(0) << *h.responce();
-//    out.device()->seek(0);
-//    out << quint16(arrBlock.size() - sizeof(quint16));
-//    socket->write(arrBlock);
-//    socket->close();
 }
 
 void Worker::handle2(QString &resp)

@@ -10,18 +10,19 @@
 class Handler
 {
 public:
-    Handler(const QString &path, const QString& responce);
+    Handler(const QString &path, const QString& request);
 
     QString* responce();
-    QString handle();
-    QString* readAll();
 
 private:
-    QDir* dir;
-    QString* resp;
-    QString need_file;
+    QDir dir;
+    QString req;
+    QString file;
+    QString* data;
 
+    QString getFileName();
     QFile* find(const QString& need_file);
+    QString* read();
 };
 
 #endif // HANDLER_H
