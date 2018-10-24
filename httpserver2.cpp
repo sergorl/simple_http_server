@@ -13,7 +13,7 @@ HttpServer2::HttpServer2(Args& arg, QObject *parent) : QTcpServer(parent)
 void HttpServer2::start()
 {
     if (listen(QHostAddress(ip), port.toInt())) {
-        qDebug() << QString("Server starts to listen at %1:%2").arg(ip, port);
+//        qDebug() << QString("Server starts to listen at %1:%2").arg(ip, port);
     }
     else {
         qDebug() << "Problem: " << errorString();
