@@ -22,7 +22,8 @@ QString* OK::toString()
 QString* NOT_FOUND::toString()
 {
     QString* ans = new QString(info);
-    QString content = "<html><h2><center>404 Not Found</center></h2></html>";
+//    QString content = "<html><h2><center>404 Not Found</center></h2></html>";
+    QString content = "<b>404 Not Found</b>";
     QString* resp = new QString(std::move(ans->arg("404 NOT FOUND", QString::number(content.length()), content)));
     return resp;
 }
