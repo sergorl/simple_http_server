@@ -16,8 +16,8 @@ void Worker::setDir(QString dir)
 
 void Worker::run() {
 
-    work1();
-//    work2();
+//    work1();
+    work2();
 }
 
 void Worker::work1()
