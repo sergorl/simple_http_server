@@ -43,6 +43,8 @@ QString* Handler::read()
 
         QByteArray bytes = pFile->readAll();
 
+        pFile->close();
+
         QString chars = QString::fromLocal8Bit(bytes.data());
         data = new QString(std::move(chars));
     }
