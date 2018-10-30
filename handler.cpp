@@ -56,9 +56,13 @@ QFile* Handler::find(const QString &need_file)
 {
     QFile* file = nullptr;
 
-    for(auto& file_info : dir.entryInfoList(QDir::Files)) {
+    for(QFileInfo& file_info : dir.entryInfoList(QDir::Files)) {
 
-        if (file_info.canonicalFilePath().contains(need_file)) {
+        QString path = file_info.canonicalFilePath();
+        QStringList parts = path.split("/");
+        QString file_name = parts.at(parts.length()-1);
+
+        if (file_name == need_file) {
             file = new QFile(file_info.filePath());
             break;
         }

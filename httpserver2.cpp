@@ -3,8 +3,9 @@
 HttpServer2::HttpServer2(Args& arg, QObject *parent) : QTcpServer(parent)
 {
     pool = new QThreadPool(this);
-    pool->setMaxThreadCount(8);
-    setMaxPendingConnections(32);
+//    pool = QThreadPool::globalInstance();
+    pool->setMaxThreadCount(2000);
+    setMaxPendingConnections(512);
 
     ip = arg.ip;
     port = arg.port;
@@ -30,24 +31,36 @@ void HttpServer2::incomingConnection(qintptr socketDescriptor)
     connect(socket, SIGNAL(readyRead()),
             this,   SLOT(readData()),
             Qt::DirectConnection);
+
+//    qDebug() << "New connection";
 }
 
 void HttpServer2::readData()
 {
+//    qDebug() << "Read";
+
     pClientSocket = (QTcpSocket*)sender();
     QString from = pClientSocket->readAll();
 
     Worker* w = new Worker(from);
-    w->setDir(dir);
+    w->setDir(dir);        
+    w->setAutoDelete(true);
 
     connect(w, &Worker::workDone, this, &HttpServer2::sendData, Qt::QueuedConnection);
 
     pool->start(w);
+
+//    qDebug() << "End Read";
 }
 
 void HttpServer2::sendData(QByteArray to)
-{
+{    
+//    qDebug() << "Write";
+
     pClientSocket->write(to);
     pClientSocket->close();
     pClientSocket->disconnectFromHost();
+
+//    qDebug() << "Send";
+
 }

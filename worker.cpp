@@ -17,6 +17,7 @@ void Worker::setDir(QString dir)
 void Worker::run() {
 
 //    work1();
+//    qDebug() << "Work";
     work2();
 }
 
@@ -40,6 +41,7 @@ void Worker::work2()
     handle2(from);
 
     loop->exec();
+
 }
 
 void Worker::readData()
@@ -61,11 +63,15 @@ void Worker::handle2(QString &resp)
     Handler h(dir, resp);
     QByteArray responce = h.responce()->toLocal8Bit();
 
+//    qDebug() << "Handle";
+
+//    loop->quit();
+
     emit workDone(responce);
 }
 
 void Worker::onDisconnected()
 {
     socket->close();
-    loop->quit();
+//    loop->quit();
 }
