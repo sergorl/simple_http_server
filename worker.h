@@ -19,31 +19,21 @@ class Worker : public QObject, public QRunnable {
     Q_OBJECT
 
 public:
-    explicit Worker(qintptr socketDescriptor_);
     explicit Worker(QString from_);
-
-    ~Worker();
 
     void setDir(QString dir);
 
     void run() override;
 
-    void work1();
-    void work2();
+    void work();
 
 signals:
     void workDone(QByteArray resp);
 
 private slots:
-    void readData();
     void handle(QString& resp);
-    void handle2(QString& resp);
-    void onDisconnected();
 
 private:
-    QTcpSocket* socket;
-    QEventLoop *loop;
-    qintptr socketDescriptor;
     QString dir;
     QString from;
 };

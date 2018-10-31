@@ -1,7 +1,6 @@
 #include <QCoreApplication>
 #include <QDebug>
 
-#include "httpserver.h"
 #include "httpserver2.h"
 #include "response.h"
 #include "handler.h"

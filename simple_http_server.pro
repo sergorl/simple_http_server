@@ -21,7 +21,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         worker.cpp \
-        httpserver.cpp \
         response.cpp \
         handler.cpp \
         httpserver2.cpp \
@@ -29,7 +28,6 @@ SOURCES += \
 
 HEADERS += \
         worker.h \
-        httpserver.h \
         response.h \
         handler.h \
         httpserver2.h \
