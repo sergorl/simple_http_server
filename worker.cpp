@@ -9,20 +9,15 @@ void Worker::setDir(QString dir)
     this->dir = dir;
 }
 
-void Worker::run() {
-
-//    qDebug() << "Work";
+void Worker::run()
+{
     handle(from);
 }
 
 void Worker::handle(QString req)
 {
-//    qDebug() << "Handle start";
-
     Handler h(dir, req);
     QByteArray responce = h.responce()->toLocal8Bit();
-
-//    qDebug() << "Handle end";
 
     emit workDone(pClientSocket, responce);
 }

@@ -21,8 +21,6 @@ int main(int argc, char *argv[])
 
     QCoreApplication a(argc, argv);
 
-    int r = getopt(argc, argv, "qwerty");
-
     Args arg;
     HttpServer2 server(arg);
     server.start();
