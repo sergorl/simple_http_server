@@ -4,7 +4,7 @@ HttpServer2::HttpServer2(Args& arg, QObject *parent) : QTcpServer(parent)
 {
     pool = new QThreadPool(this);
 //    pool->setMaxThreadCount(2);
-    setMaxPendingConnections(128);
+//    setMaxPendingConnections(128);
 
     ip = arg.ip;
     port = arg.port;
@@ -59,7 +59,6 @@ void HttpServer2::sendData(QByteArray to)
 
     pClientSocket->write(to);
     pClientSocket->close();
-    pClientSocket->disconnectFromHost();
 
 //    qDebug() << "Send";
 
