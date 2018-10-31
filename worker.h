@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtNetwork/QTcpSocket>
 #include <QtDebug>
+#include <QTcpSocket>
 #include <QRunnable>
 #include <QThread>
 #include <QTextStream>
@@ -19,7 +20,7 @@ class Worker : public QObject, public QRunnable {
     Q_OBJECT
 
 public:
-    explicit Worker(QString from_);
+    explicit Worker(QTcpSocket* socket, QString req);
 
     void setDir(QString dir);
 
@@ -28,14 +29,15 @@ public:
     void work();
 
 signals:
-    void workDone(QByteArray resp);
+    void workDone(QTcpSocket* socket, QByteArray resp);
 
 private slots:
-    void handle(QString& resp);
+    void handle(QString req);
 
 private:
     QString dir;
     QString from;
+    QTcpSocket* pClientSocket;
 };
 
 #endif // WORKER_H

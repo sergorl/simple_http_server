@@ -25,12 +25,10 @@ public:
 
 private slots:
     void readData();
-    void sendData(QByteArray to);
+    void sendData(QTcpSocket* pClientSocket, QByteArray to);
 
 private:
-    QThreadPool* pool;
-    QTcpSocket *pClientSocket;
-    QEventLoop* loop;
+    QThreadPool* pool;    
 
     QString ip;
     QString port;

@@ -1,6 +1,8 @@
 #include "worker.h"
 
-Worker::Worker(QString from_) : from(from_) {}
+Worker::Worker(QTcpSocket* socket, QString req) : from(req),
+                                                  pClientSocket(socket)
+{}
 
 void Worker::setDir(QString dir)
 {
@@ -13,7 +15,7 @@ void Worker::run() {
     handle(from);
 }
 
-void Worker::handle(QString &req)
+void Worker::handle(QString req)
 {
 //    qDebug() << "Handle start";
 
@@ -22,6 +24,6 @@ void Worker::handle(QString &req)
 
 //    qDebug() << "Handle end";
 
-    emit workDone(responce);
+    emit workDone(pClientSocket, responce);
 }
 
